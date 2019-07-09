@@ -2,7 +2,7 @@ from . import Config
 
 
 class Development(Config):
-    ENV_TYPE =  "Dev"
+    ENV_TYPE =  "Development"
 
     ENV_TYPE = False
     DB_NAME = "praksa_2019"
@@ -11,5 +11,5 @@ class Development(Config):
     DB_HOST = "127.0.0.1"
     DB_PORT = 5432
 
-    SQLALCHEMY_DATABASE_URI = f'postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}:{DB_NAME}'
+    SQLALCHEMY_DATABASE_URI = f'postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
         
