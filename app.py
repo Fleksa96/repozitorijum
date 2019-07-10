@@ -12,7 +12,8 @@ elif os.environ['ENV_TYPE'] == 'Production':
 db = SQLAlchemy()
 
 
-
+from marshmallow import ValidationError
+from flask import jsonify
 from measurement_bp import measurements_bp
 from measurement_bp.models.Measurement import Measurement
 
@@ -28,6 +29,9 @@ def create_app(conf):
 app = create_app(Conf)
 migrate = Migrate(app, db)
 
+
 @app.route("/")
 def hello():
     return "HELLO WORLD!"
+    
+
