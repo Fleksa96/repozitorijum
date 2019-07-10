@@ -10,3 +10,6 @@ class Production(Config):
     DB_PASSWORD = None
     DB_HOST = None
     DB_PORT = None
+
+    username = "Aleksa"
+    password = "123456"

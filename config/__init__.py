@@ -11,5 +11,8 @@ class Config:
     DB_HOST = None
     DB_PORT = None
 
+    username = None
+    password = None
+
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = None
