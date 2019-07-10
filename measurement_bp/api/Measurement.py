@@ -1,8 +1,9 @@
 import os
 from app import db
 from flask_restplus import Resource
-from measurement_bp import measurement_api
+from measurement_bp import measurements_api
 from app import Conf
+from measurement_bp.models.Measurement import Measurement
 
 from functools import wraps
 from werkzeug.exceptions import Forbidden
@@ -22,13 +23,13 @@ def authentication_required(f):
 
 
 
+@measurements_api.route("/")
 class Measurements(Resource):
 
     @authentication_required
-    @measurement_api.route("/measurement")
     def post(self):
         data = request.get_json(force=True)
-        measurement = Measurement(air_quality=data['air_quality'], data["temperature"], data["humidity"])
+        measurement = Measurement(air_quality=data['air_quality'], temperature = data["temperature"], humidity = data["humidity"])
         db.session.add(measurement)
         db.session.commit()
 
