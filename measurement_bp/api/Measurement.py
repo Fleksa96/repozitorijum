@@ -4,6 +4,8 @@ from flask_restplus import Resource
 from measurement_bp import measurements_api
 from app import Conf
 from measurement_bp.models.Measurement import Measurement
+from measurement_bp.schemas.CreateMeasurementSchema import CreateMeasurement
+from marshmallow import ValidationError
 
 from functools import wraps
 from werkzeug.exceptions import Forbidden
@@ -29,6 +31,10 @@ class Measurements(Resource):
     @authentication_required
     def post(self):
         data = request.get_json(force=True)
+        try:
+            validated_data = CreateMeasurement().load(data)
+        except ValidationError as error:
+            return {'success': False, 'message': error.normalized_messages()}, 400
         measurement = Measurement(air_quality=data['air_quality'], temperature = data["temperature"], humidity = data["humidity"])
         db.session.add(measurement)
         db.session.commit()
