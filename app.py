@@ -29,6 +29,10 @@ def create_app(conf):
 app = create_app(Conf)
 migrate = Migrate(app, db)
 
+@app.errorhandler(ValidationError)
+def _on_validation_error(ex):
+    return ex.normalized_messages()
+
 
 @app.route("/")
 def hello():
