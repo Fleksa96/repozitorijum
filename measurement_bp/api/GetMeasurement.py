@@ -14,10 +14,7 @@ class GetMeasurement(Resource):
         data = db.session.query(Measurement).all()
 
 
-        print("\n\n\n\n")
-        print(data)
-        print("\n\n\n\n")
-            
+
         data = data[-1]
 
 

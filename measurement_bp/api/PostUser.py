@@ -5,7 +5,7 @@ from measurement_bp import measurements_api
 from measurement_bp.models.User import User
 from measurement_bp.schemas.CreateUser import CreateUser
 from marshmallow import ValidationError
-
+from app import Conf
 from functools import wraps
 from werkzeug.exceptions import Forbidden
 from flask import request
@@ -15,22 +15,12 @@ def authentication_required(f):
     def wrapped(*args, **kwargs):
         if not request.authorization:
             raise Forbidden
- #   import import pdb; pdb.set_trace()
- 
-        usrs = db.session.query(User).all()
 
-        print("\n\n\n\n")
-        print(usrs)
-        print("\n\n\n\n")
-
-        if not request.authorization['username'] in [u.username for u in usrs]:
-            print("nepostoji")
+        if request.authorization['username'] ==Conf.username and request.authorization['password']==Conf.password:
             return f(*args, **kwargs)
         else:
-            print("postoji")
             raise Forbidden
     return wrapped
-
 
 
 @measurements_api.route("/register/")
@@ -42,6 +32,10 @@ class UserAPI(Resource):
 
         validated_data = CreateUser().load(data)
         user = User(username = data["username"], password = data['password'])
+
+        users = db.session.query(User).all()
+        if user.username in [u.username for u in users]:
+            return {'message': 'Can\'t insert user, already exists.'}, 400
 
         db.session.add(user)
         db.session.commit()

@@ -2,7 +2,9 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-
+import pandas as pd
+import time
+import threading
 
 if os.environ['ENV_TYPE'] == 'Development':
     from config.development import Development as Conf
@@ -11,6 +13,28 @@ elif os.environ['ENV_TYPE'] == 'Production':
 
 db = SQLAlchemy()
 
+class csvThread(threading.Thread):
+    def __init__(self):
+        super(csvThread, self).__init__()
+        pass
+
+    def export():
+        measurements = db.session.query(Measurement).all()
+        ret = []
+        for measure in measurements:
+            ret.append({ "air_quality" : measure.air_quality, "humidity" : measure.humidity, "temperature" : measure.temperature })
+        
+        df = pd.DataFrame(ret)
+        df.to_csv('out.csv', index=False) 
+
+    def run(self):
+        while 1:
+            time.sleep(10)
+            export()
+
+
+thread1 = csvThread()
+thread1.start()
 
 from marshmallow import ValidationError
 from flask import jsonify
@@ -33,7 +57,6 @@ migrate = Migrate(app, db)
 @app.errorhandler(ValidationError)
 def _handle_api__error(ex):
     return ex.normalized_messages()
-
 
 @app.route("/")
 def hello():
