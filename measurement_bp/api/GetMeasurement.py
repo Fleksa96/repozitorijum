@@ -11,8 +11,16 @@ class GetMeasurement(Resource):
 
     
     def get(self):
-        data = db.session.query(Measurement)
+        data = db.session.query(Measurement).all()
+
+
+        print("\n\n\n\n")
+        print(data)
+        print("\n\n\n\n")
+            
         data = data[-1]
+
+
         get_schema = GetSchema().dump(data)
         return get_schema
 

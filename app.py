@@ -16,6 +16,7 @@ from marshmallow import ValidationError
 from flask import jsonify
 from measurement_bp import measurements_bp
 from measurement_bp.models.Measurement import Measurement
+from measurement_bp.models.User import User
 
 def create_app(conf):
     app = Flask(__name__)
