@@ -30,7 +30,7 @@ app = create_app(Conf)
 migrate = Migrate(app, db)
 
 @app.errorhandler(ValidationError)
-def _on_validation_error(ex):
+def _handle_api__error(ex):
     return ex.normalized_messages()
 
 

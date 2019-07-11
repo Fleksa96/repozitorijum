@@ -10,6 +10,6 @@ measurements_api = Api(measurements_bp)
 
 @measurements_api.errorhandler(ValidationError)
 def _handle_api_error(ex):
-    return "Hell"
+    return ""
 
-from .api.Measurement import Measurements     
+from .api import GetMeasurement, Measurement

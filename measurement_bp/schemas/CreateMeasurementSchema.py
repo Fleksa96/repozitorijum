@@ -1,7 +1,7 @@
-from marshmallow import Schema, fields
+from marshmallow import Schema, fields, validate
 
 
 class CreateMeasurement(Schema):
-    air_quality = fields.Float(required=True)
-    temperature = fields.Float(required=True)
-    humidity = fields.Float(required=True)
+    air_quality = fields.Float(required=True, validate=validate.Range(min=0, max=500))
+    temperature = fields.Float(required=True, validate=validate.Range(min=-100, max = 100))
+    humidity = fields.Float(required=True, validate=validate.Range(min=0, max = 100))
