@@ -4,6 +4,7 @@ class Production(Config):
 
     ENV_TYPE = "Production" 
 
+
     DB_NAME = "d2ahcqfavaeia4"
     DB_USER = "ntleqhjmibyqmo"
     DB_PASSWORD = "b3b483d90db37045bca3a86b194233c9098100f72d78364692c77f165306a581"
