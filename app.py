@@ -59,10 +59,12 @@ def create_app(conf):
 
     return app
     
-if __name__ == '__main__':
-        app.run()
+
 app = create_app(Conf)
 migrate = Migrate(app, db)
+
+if __name__ == '__main__':
+    app.run()
 
 @app.errorhandler(ValidationError)
 def _handle_api__error(ex):
