@@ -8,7 +8,7 @@ import pandas as pd
 
 """if os.environ['ENV_TYPE'] == 'Development':
     from config.development import Development as Conf
-elif """os.environ['ENV_TYPE'] == 'Production':
+elif os.environ['ENV_TYPE'] == 'Production':"""
     from config.production import Production as Conf
 
 db = SQLAlchemy()
