@@ -48,7 +48,7 @@ def create_app(conf):
     app = Flask(__name__)
     app.config.from_object(conf)
     db.init_app(app)
-
+    ENV_TYPE = "Production"
     cron = CronTab(user=True)
     job = cron.new(command='python /home/Desktop/git/repozitorijum/utilsPackage/exporter.py')  
     job.minute.every(1)
