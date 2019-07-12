@@ -3,8 +3,8 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import pandas as pd
-import time
-import threading
+#import time
+#import threading
 
 if os.environ['ENV_TYPE'] == 'Development':
     from config.development import Development as Conf
@@ -13,7 +13,7 @@ elif os.environ['ENV_TYPE'] == 'Production':
 
 db = SQLAlchemy()
 
-class csvThread(threading.Thread):
+"""class csvThread(threading.Thread):
     def __init__(self):
         super(csvThread, self).__init__()
         pass
@@ -34,18 +34,26 @@ class csvThread(threading.Thread):
 
 
 thread1 = csvThread()
-thread1.start()
+thread1.start()"""
+
 
 from marshmallow import ValidationError
 from flask import jsonify
 from measurement_bp import measurements_bp
 from measurement_bp.models.Measurement import Measurement
 from measurement_bp.models.User import User
+from crontab import CronTab
 
 def create_app(conf):
     app = Flask(__name__)
     app.config.from_object(conf)
     db.init_app(app)
+
+    cron = CronTab(user=True)
+    job = cron.new(command='python /home/Desktop/git/repozitorijum/utilsPackage/exporter.py')  
+    job.minute.every(1)
+
+    cron.write()
 
     app.register_blueprint(measurements_bp)
 

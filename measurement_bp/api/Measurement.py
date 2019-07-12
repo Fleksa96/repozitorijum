@@ -25,14 +25,6 @@ def authentication_required(f):
     return wrapped
 
 
-def export():
-    measurements = db.session.query(Measurement).all()
-    ret = []
-    for measure in measurements:
-        ret.append({ "air_quality" : measure.air_quality, "humidity" : measure.humidity, "temperature" : measure.temperature })
-     
-    df = pd.DataFrame(ret)
-    df.to_csv('out.csv', index=False) 
 
 @measurements_api.route("/")
 class Measurements(Resource):
@@ -41,12 +33,12 @@ class Measurements(Resource):
     def post(self):
         data = request.get_json(force=True)
 
+        
+
         validated_data = CreateMeasurement().load(data)
         measurement = Measurement(air_quality=data['air_quality'], temperature = data["temperature"], humidity = data["humidity"])
         db.session.add(measurement)
         db.session.commit()
-
-        export()
 
         return {'message': 'Inserted measurement.'}, 200
 
