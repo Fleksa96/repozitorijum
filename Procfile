@@ -1,4 +1,4 @@
-export ENV_TYPE=Production
+export ENV_TYPE="Production"
 web: gunicorn app:app
 init: python manage.py db init
 migrate: python manage.py db migrate
