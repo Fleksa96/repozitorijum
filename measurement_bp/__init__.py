@@ -12,4 +12,4 @@ measurements_api = Api(measurements_bp)
 def _handle_api_error(ex):
     return ""
 
-from .api import GetMeasurement, Measurement, UserAPI
+from .api import GetMeasurement, Measurement, UserAPI, UserMeasurement

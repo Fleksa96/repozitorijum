@@ -8,4 +8,3 @@ class User(db.Model):
 
     username = Column(String, primary_key = True)
     password = Column(String)
- 
