@@ -103,4 +103,13 @@ public class Measurement implements Parcelable{
         parcel.writeString(t1);
 
     }
+
+    @Override
+    public String toString() {
+        return  "id=" + id +
+                ", temperature=" + temperature +
+                ", pollution=" + pollution +
+                ", timestamp='" + timestamp + '\'' +
+                ", humidity=" + humidity;
+    }
 }

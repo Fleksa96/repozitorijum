@@ -8,6 +8,7 @@
     android:background="@drawable/background"
     >
 
+
     <ImageView
         android:id="@+id/img1"
         android:layout_width="220dp"
@@ -134,25 +135,44 @@
         tools:text="111"
         />
 
+    <Button
+        android:id="@+id/share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#2F000000"
+        android:fontFamily="@font/roboto_light"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+
+        android:text="Share"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
     <Button
         android:id="@+id/button"
-        android:background="#2F000000"
-        android:textColor="@android:color/white"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="0dp"
+        android:layout_marginEnd="15dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="7dp"
-        android:text="Show History"
+        android:background="#2F000000"
         android:fontFamily="@font/roboto_light"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="Show History"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/share"
+        />
 
     <View
         android:layout_width="match_parent"
